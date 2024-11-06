@@ -3,6 +3,9 @@ Proyecto Web de Calidad de Software
 
 ## Requisitos
 Visual Studio Code + Extension: Live Server
+**Manejo de versiones:**
+* Extension: Git
+* Git o Github desktop
 
 ## Notas para desarrollo
 * **CSS:** Utilizar solo el main.css
