@@ -1,0 +1,156 @@
+<script>
+    // Presentacion
+    const mainButton = document.getElementById('main-button');
+    let pressDuration = 0;
+    let pressInterval;
+
+    // Función para crear partículas desde la parte inferior completa
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+
+        // Posición aleatoria a lo largo del ancho de la pantalla
+        const xOffset = Math.random() * window.innerWidth;
+        particle.style.left = `${xOffset}px`;
+
+        // Agregar la partícula al body
+        document.body.appendChild(particle);
+
+        // Remover la partícula después de la animación
+        particle.addEventListener('animationend', () => {
+            particle.remove();
+        });
+    }
+
+    // Incrementar la velocidad de partículas según el tiempo de presión
+    function startGeneratingParticles() {
+        pressInterval = setInterval(() => {
+            pressDuration += 0.1;
+            createParticle();
+            createParticle(); // Crear más partículas para aumentar el efecto visual
+
+            // Redirigir después de 3 segundos
+            if (pressDuration >= 3) {
+                clearInterval(pressInterval);
+                navigate(1);
+            }
+        }, 100 / (pressDuration + 2)); // Aumenta la frecuencia según la duración
+    }
+
+    // Detener la generación de partículas
+    function stopGeneratingParticles() {
+        clearInterval(pressInterval);
+        pressDuration = 0; // Reiniciar duración
+    }
+
+    // Eventos para mantener el botón presionado
+    mainButton.addEventListener('mousedown', startGeneratingParticles);
+    mainButton.addEventListener('mouseup', stopGeneratingParticles);
+    mainButton.addEventListener('mouseleave', stopGeneratingParticles);
+
+    // Eventos para dispositivos móviles
+    mainButton.addEventListener('touchstart', startGeneratingParticles);
+    mainButton.addEventListener('touchend', stopGeneratingParticles);
+    mainButton.addEventListener('touchcancel', stopGeneratingParticles);
+
+    // MODULO 1
+
+    // tuerca y panel
+    const gear = document.getElementById('gear');
+    const panels = [
+        document.getElementById('panel1'),
+        document.getElementById('panel2'),
+        document.getElementById('panel3')
+    ];
+
+    const gear2 = document.getElementById('gear-2');
+
+    // Variable para el ángulo de rotación
+    let rotation = 0;
+    let rotation2 = 0;
+
+    // Rota el engranaje al tocar en móviles
+    gear.addEventListener('click', () => {
+        rotation += 120; // Gira 120 grados al tocar
+        gear.style.transform = `rotate(${rotation}deg)`;
+        updatePanels();
+    });
+
+    gear2.addEventListener('click', () => {
+        rotation += 120; // Gira 120 grados al tocar
+        gear2.style.transform = `rotate(${rotation}deg)`;
+        updatePanels();
+    });
+
+    // Función para mostrar paneles según la rotación
+    function updatePanels() {
+        panels.forEach(panel => panel.classList.remove('show')); // Oculta todos los paneles
+        if (rotation % 360 < 120) {
+            panels[0].classList.add('show');
+        } else if (rotation % 360 < 240) {
+            panels[1].classList.add('show');
+        } else {
+            panels[2].classList.add('show');
+        }
+    }
+
+    // Datos de las personas
+    const personas = [
+        {
+            nombre: "Frederick W. Taylor",
+            imagen: "public/img/pioneros/ft.jpg",
+            detalles: `
+    <p>Contribuyó al desarrollo de la calidad mediante la introducción de métodos sistemáticos para mejorar la eficiencia en el trabajo. Su enfoque se basó en la estandarización de procesos, la división del trabajo, y el uso de estudios de tiempo y movimiento para optimizar la productividad. Estos principios sentaron las bases para las prácticas modernas de gestión de calidad, al promover la mejora continua y el control de procesos en la industria.</p>
+`
+        },
+        {
+            nombre: "William Edwards Deming",
+            imagen: "public/img/pioneros/wed.jpg",
+            detalles: `
+    <p>Fue clave en el desarrollo de la calidad al introducir el Ciclo de Deming o PDCA (Planificar, Hacer, Verificar, Actuar), un enfoque sistemático para la mejora continua. También promovió la importancia de la gestión y liderazgo en la calidad, destacando que el 94% de los problemas de calidad se deben a fallos del sistema, no del trabajador. Sus ideas transformaron la industria japonesa en el siglo XX, estableciendo las bases para el movimiento de calidad total.</p>
+`
+        },
+        {
+            nombre: "Joseph M. Juran",
+            imagen: "public/img/pioneros/jm.jpg",
+            detalles: `
+    <p>Fue un pionero en el desarrollo de la calidad al introducir el concepto de "control de calidad total" y enfatizar la importancia de la gestión en la calidad. Desarrolló la "trilogía de Juran," que se enfoca en la planificación, control y mejora de la calidad. Juran también destacó la necesidad de involucrar a toda la organización en el proceso de calidad y fue fundamental en la transformación del enfoque hacia la satisfacción del cliente como objetivo central de la calidad.</p>
+`
+        },
+        {
+            nombre: "Phillip Crosby",
+            imagen: "public/img/pioneros/pc.jpg",
+            detalles: `
+    <p>Es responsable de la conocida máxima de Cero defectos, tan importante hoy en día en cualquier sistema de gestión de calidad. De hecho, son muchos los que ven un importante reflejo de algunas de sus teorías en la redacción de las normas ISO más importantes. Para él, la ausencia de defectos debería ser el estándar de desempeño de los sistemas de gestión y que el secreto para lograr este ambicioso objetivo era la prevención.  
+
+Estos expertos sentaron las bases de la gestión de la calidad moderna, y sus principios y metodologías aún se aplican para asegurar la excelencia en la producción y los servicios.</p>
+`
+        }
+    ];
+
+    // Función para cambiar de persona
+    function switchPerson(index) {
+        const persona = personas[index];
+        document.getElementById("person-name").textContent = persona.nombre;
+        document.getElementById("person-image").src = persona.imagen;
+        document.getElementById("person-details").innerHTML = persona.detalles;
+
+        // Actualizar estado activo en el menú
+        document.querySelectorAll(".photo-card-menu-item").forEach((button, btnIndex) => {
+            button.classList.toggle("active", btnIndex === index);
+        });
+    }
+
+    switchPerson(0);
+
+    // MODULO 2
+
+    // MODULO 3
+
+    // MODULO 4
+
+    // Mostrar la primera sección al cargar
+    window.onload = () => {
+        showCurrentSection();
+    };
+</script>

@@ -1,0 +1,321 @@
+/* Estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    background-color: #FAF3E0;
+}
+
+/* Contenedor principal de secciones */
+#sections-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilos de las secciones */
+.section {
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    visibility: hidden;
+}
+
+.section.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.section.vertical {
+    height: auto;
+    /* Cambia de 100vh a auto para que se ajuste al contenido */
+    overflow-y: auto;
+    /* Mantener el desplazamiento vertical */
+}
+
+.scroll-content {
+    padding: 10px;
+    min-height: 200vh;
+    /* Cambia a un valor mayor para asegurarte de que haya suficiente contenido para el scroll */
+}
+
+.section.horizontal {
+    width: 100vw;
+    overflow-x: auto;
+    /* Permitir desplazamiento horizontal */
+    position: relative;
+    /* Posicionamiento relativo para manejar el scroll */
+}
+
+.scroll-content-horizontal {
+    display: flex;
+    width: 100%;
+    /* Cambia esto a 100% para que el contenedor use el ancho completo */
+}
+
+.horizontal-section {
+    flex: 0 0 auto;
+    /* Cambiar a auto para que cada sección ocupe solo el espacio necesario */
+    min-width: 300px;
+    /* Asegura que cada sección tenga un ancho mínimo */
+    padding: 10px;
+    /* Espaciado interno */
+    box-sizing: border-box;
+    /* Asegura que el padding no sume al ancho total */
+}
+
+.scroll-content-horizontal p {
+    flex: 0 0 auto;
+    /* Cambiar a auto para que cada párrafo ocupe solo el espacio necesario */
+    width: 100%;
+    /* Asegura que cada párrafo ocupe el 100% del ancho de su contenedor */
+}
+
+/* Estilos de disposicion */
+.flex {
+    display: flex;
+}
+
+.center {
+    align-items: center;
+    display: flex;
+}
+
+.start {
+    align-items: start;
+}
+
+/* Estilos de los botones */
+.buttons {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Engranaje */
+.gear {
+    width: 150px;
+    margin-top: 50px;
+    cursor: pointer;
+    transition: transform 0.1s linear;
+}
+
+/* Paneles de información */
+.panel {
+    display: none;
+    position: relative;
+    background: #f0f0f0;
+    color: #333;
+    width: 80%;
+    max-width: 300px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.panel.show {
+    display: block;
+}
+
+/*1*/
+/* Estilo del botón principal */
+#main-button {
+    background-color: #4444447a;
+    color: #fff;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main-button:active {
+    transform: scale(1.2);
+}
+
+.presentacion {
+    background-color: #000000;
+}
+
+/* Estilo para las partículas */
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particle-animation 2s ease-out forwards;
+    opacity: 0;
+    bottom: 0;
+}
+
+@keyframes particle-animation {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-200px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/*2*/
+
+/* Archivo styles.css */
+
+.photo-card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photo-card-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #422a1f;
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.photo-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.photo-card-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.photo-card-info {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.photo-card-role {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.photo-card-details {
+    font-size: 0.85em;
+    color: #555;
+    overflow-y: auto;
+    max-height: 100px;
+    width: 100%;
+    text-align: left;
+    padding-right: 5px;
+    /* Añade un pequeño padding para evitar que el texto se superponga */
+}
+
+.photo-card-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 10px 0;
+}
+
+.photo-card-menu {
+    display: flex;
+    justify-content: space-around;
+}
+
+.photo-card-menu-item {
+    background: none;
+    border: none;
+    font-size: 0.9em;
+    color: #422a1f;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.photo-card-menu-item.active,
+.photo-card-menu-item:hover {
+    border-bottom: 2px solid #d9534f;
+}
+
+
+/*3*/
+
+/*4*/
+.section.vh50 {
+    height: 50vh;
+}
+
+.section.vh75 {
+    height: 75vh;
+}
+
+.section.vh100 {
+    height: 100vh;
+}
+
+.vh150 {
+    height: 150vh;
+}
+
+.vh200 {
+    height: 200vh;
+}
+
+/*5*/
+
+/*6*/
